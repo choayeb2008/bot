@@ -47,7 +47,7 @@ user_states: Dict[int, str] = {}
 # ──────────────────────────────────────────────
 # رسالة الترحيب
 # ──────────────────────────────────────────────
-WELCOME_MESSAGE = """🖼️ *مرحباً بك في بوت تحليل وتعديل الصور\!*
+WELCOME_MESSAGE = r"""🖼️ *مرحباً بك في بوت تحليل وتعديل الصور\!*
 
 ✨ *آلية العمل:*
 
@@ -188,14 +188,14 @@ async def apply_settings_to_image(image_path: str, settings: dict, user_id: int)
 # ──────────────────────────────────────────────
 def format_settings(settings: dict) -> str:
     labels = {
-        'contrast':    '🎚️ التباين \(Contrast\)',
-        'brightness':  '☀️ السطوع \(Brightness\)',
-        'saturation':  '🌈 التشبع \(Saturation\)',
-        'shadows':     '🌑 الظلال \(Shadows\)',
-        'highlights':  '💡 الإضاءة \(Highlights\)',
-        'temperature': '🌡️ درجة الحرارة \(Temperature\)',
-        'sharpness':   '✂️ الحدة \(Sharpness\)',
-        'fade':        '👻 التلاشي \(Fade\)',
+        'contrast':    r'🎚️ التباين \(Contrast\)',
+        'brightness':  r'☀️ السطوع \(Brightness\)',
+        'saturation':  r'🌈 التشبع \(Saturation\)',
+        'shadows':     r'🌑 الظلال \(Shadows\)',
+        'highlights':  r'💡 الإضاءة \(Highlights\)',
+        'temperature': r'🌡️ درجة الحرارة \(Temperature\)',
+        'sharpness':   r'✂️ الحدة \(Sharpness\)',
+        'fade':        r'👻 التلاشي \(Fade\)',
     }
     text = "📊 *إعدادات التحرير المستخرجة:*\n\n"
     for key, label in labels.items():
@@ -232,7 +232,7 @@ async def photo_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     try:
         await update.effective_chat.send_action('upload_document')
-        processing_msg = await message.reply_text("⏳ جاري تحليل الصورة واستخراج الإعدادات\.\.\.", parse_mode='MarkdownV2')
+        processing_msg = await message.reply_text(r"⏳ جاري تحليل الصورة واستخراج الإعدادات\.\.\.", parse_mode='MarkdownV2')
 
         photo_file = await context.bot.get_file(message.photo[-1].file_id)
         photo_path = f"temp_photo_{user_id}.jpg"
@@ -245,7 +245,7 @@ async def photo_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         keyboard = [[InlineKeyboardButton("📸 نسخ التعديل على صورتي", callback_data="apply_settings")]]
         await processing_msg.delete()
         await message.reply_text(
-            f"✅ *تم تحليل الإعدادات بنجاح\!*\n\n{format_settings(settings)}",
+            fr"✅ *تم تحليل الإعدادات بنجاح\!*\n\n{format_settings(settings)}",
             parse_mode='MarkdownV2',
             reply_markup=InlineKeyboardMarkup(keyboard)
         )
@@ -269,7 +269,7 @@ async def apply_edits_photo_handler(update: Update, context: ContextTypes.DEFAUL
 
     try:
         await update.effective_chat.send_action('upload_document')
-        processing_msg = await message.reply_text("⏳ جاري تطبيق الإعدادات على صورتك\.\.\.", parse_mode='MarkdownV2')
+        processing_msg = await message.reply_text(r"⏳ جاري تطبيق الإعدادات على صورتك\.\.\.", parse_mode='MarkdownV2')
 
         if user_id not in user_settings:
             await processing_msg.edit_text("❌ لم يتم العثور على إعدادات. يرجى تحليل صورة أولاً.")
@@ -287,7 +287,7 @@ async def apply_edits_photo_handler(update: Update, context: ContextTypes.DEFAUL
         with open(output_path, 'rb') as photo:
             await message.reply_photo(
                 photo=photo,
-                caption="✅ تم تطبيق الإعدادات بنجاح\! 📸",
+                caption=r"✅ تم تطبيق الإعدادات بنجاح\! 📸",
                 parse_mode='MarkdownV2'
             )
 
