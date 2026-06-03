@@ -1,0 +1,17 @@
+# Telegram Bot
+python-telegram-bot==21.8
+
+# Google Generative AI (Gemini)
+google-generativeai==0.7.2
+
+# Image Processing
+Pillow==10.2.0
+
+# Environment Variables
+python-dotenv==1.0.1
+
+# Async Support
+aiohttp==3.9.5
+
+# Logging
+coloredlogs==15.0.1
