@@ -4,8 +4,8 @@ python-telegram-bot==21.8
 # Google Generative AI (Gemini)
 google-generativeai==0.7.2
 
-# Image Processing
-Pillow==10.2.0
+# Image Processing (with prebuilt wheels for Render)
+Pillow==10.0.0
 
 # Environment Variables
 python-dotenv==1.0.1
