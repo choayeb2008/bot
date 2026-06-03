@@ -1,1 +1,12 @@
-services:\n  - type: web\n    name: image-editor-bot\n    runtime: python\n    plan: free\n    startCommand: python main.py\n    buildCommand: bash build.sh\n    envVars:\n      - key: TELEGRAM_TOKEN\n        scope: run\n      - key: GEMINI_API_KEY\n        scope: run\n
+services:
+  - type: web
+    name: image-editor-bot
+    runtime: python
+    plan: free
+    startCommand: python main.py
+    buildCommand: apt-get update && apt-get install -y build-essential libssl-dev libffi-dev python3-dev libjpeg-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev libopenjp2-7-dev libtiff-dev libharfbuzz0b libfribidi0 && pip install --upgrade pip setuptools wheel && pip install -r requirements.txt
+    envVars:
+      - key: TELEGRAM_TOKEN
+        scope: run
+      - key: GEMINI_API_KEY
+        scope: run
