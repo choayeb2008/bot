@@ -1,0 +1,1 @@
+services:\n  - type: web\n    name: image-editor-bot\n    runtime: python\n    plan: free\n    startCommand: python main.py\n    buildCommand: bash build.sh\n    envVars:\n      - key: TELEGRAM_TOKEN\n        scope: run\n      - key: GEMINI_API_KEY\n        scope: run\n
